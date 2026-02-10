@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+	<th:block th:replace="layout/base :: base(
+		'ログイン選択',
+		~{::head},
+		~{::#page},
+		~{::script}
+		)">
+	<!--headに追加したいものがあればここに書く(無ければ空でOK-->
+	<head></head>
+		
+		<div id="page">
+	<h1 class="mb-20">ホーム</h1>
+	<!--th:hrefにより/member/loginというURLを作れと指示-->
+	<!--class=btnでこの要素はボタンとして扱うと宣言-->
+	<th:block th:if="${session.loginId}">
+	<div class="d-flex justify-content-center gap-3">
+	<a th:href="@{/admin/announcements/form}" class="btn btn-primary">
+		お知らせ一覧
+	</a>
+	
+	<a th:href="@{/admin/announcements/list}" class="btn btn-secondary">
+		会員一覧
+		</th:block>
+		
+		<th:block th:unless="${session.gloinId}">
+			<form class="mt-4" action=""method="post" th:object="${admin}">
+				<span th:errors="*{loginId}" clsss="error"></span>
+				<p class="mt-2">ログインID:
+					<input type="text" th:field="*{loginId}"></p>
+					<p>パスワード:<input type="password" th:field="*{loginPass}"></p>
+					<input clas="btn btn-primary" type="submit" value="ログイン">
+			</form>
+		</th:block>
+		
+	</a>
+	</div>
+	</div>
+	<!--scriptを追加したい時だけ書く(無ければ空でOK-->
+	<script></script>
+	</th:block>
+	<footer>
+		<a th:href="@{/loginHome}" class="btn btn-primary">
+		ログアウト
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+			th:fragment="base(title,head,body,scripts)">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}?:'Game Bar System'">Game Bar System</title>
+	
+<!--Bootstrap css-->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	
+<!-- 各画面ごとのhead追加用-->
+<th:block th:replace="${head}?:~{}"></th:block>
+</head>
+<body>
+	
+	<div class="container mt-4">
+		<th:block th:replace="${body}"></th:block>
+	<!--ここに各画面の中身が差し込まれる-->
+	
+	</div>
+	
+	<!--Bootstrap JS-->
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<!--各画面ごとのscript追加用-->
+	<th:block th:replace="${scripts}?:~{}"></th:block>
+
+</body>
+</html>
