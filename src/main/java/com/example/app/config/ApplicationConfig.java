@@ -25,7 +25,7 @@ messageSource.setBasename("validation");
 return messageSource;
 }
 // 認証用フィルタの有効化
-@Bean
+@Bean 
 FilterRegistrationBean<AuthFilter> authFilter() {
 var bean =
 new FilterRegistrationBean<AuthFilter>(new AuthFilter());
