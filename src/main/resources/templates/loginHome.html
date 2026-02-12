@@ -11,8 +11,11 @@
 		)">
 	<!--headに追加したいものがあればここに書く(無ければ空でOK-->
 	<head></head>
-		
+	
 		<div id="page">
+			<div class="alert alert-warning"th:if="${param.needLogin}">
+						ログインしてください
+					</div>
 	<h1 class="mb-4">ログイン選択</h1>
 	<!--th:hrefにより/member/loginというURLを作れと指示-->
 	<!--class=btnでこの要素はボタンとして扱うと宣言-->

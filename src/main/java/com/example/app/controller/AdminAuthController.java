@@ -45,10 +45,17 @@ public class AdminAuthController {
 				String loginId = admin.getLoginId();
 				String loginPass = admin.getLoginPass();
 				
+				//ログインID・パスワードが正しくない
+				if(!service.isCorrectIdAndPassword(loginId, loginPass)) {
+					errors.rejectValue("loginId", "error.incorrect_id_password");
+					return "loginHome";
+				}
+		
+				
 				//ログインID・パスワード
 				//=>セッションにログインIDを格納し、リダイレクト
 				session.setAttribute("loginId", loginId);
-				return "redirect:/";
+				return "redirect:/admin/dashboard";
 			}
 			
 			@GetMapping("/logout")

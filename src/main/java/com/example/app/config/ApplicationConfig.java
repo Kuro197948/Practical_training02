@@ -30,7 +30,9 @@ FilterRegistrationBean<AuthFilter> authFilter() {
 var bean =
 new FilterRegistrationBean<AuthFilter>(new AuthFilter());
 bean.addUrlPatterns("/members/*");
-bean.addUrlPatterns("/news/*");
+bean.addUrlPatterns("/admin/*");
+bean.addUrlPatterns("/admin/*/*");
+bean.addUrlPatterns("/admin/*/*/*");
 return bean;
 }
 }

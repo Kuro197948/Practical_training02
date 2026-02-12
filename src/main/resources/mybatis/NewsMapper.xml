@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.NewsMapper">
+ <resultMap id="joinedResult" type="News" autoMapping="true">
+ <association property="detail" javaType="NewsDetail"
+ autoMapping="true" />
+ </resultMap>
+ <select id="selectAll" resultType="com.example.app.domain.News">
+ SELECT
+ id, title, author, post_date
+ FROM news
+ ORDER BY post_date DESC
+ </select>
+ <select id="selectById" parameterType="int" resultMap="joinedResult">
+ SELECT
+ news.id, news.title, news.author, news.post_date,
+ news_details.article, news_details.photo
+ FROM news
+ JOIN news_details
+ ON news.id = news_details.news_id
+ WHERE news.id = #{id}
+ </select>
+ <insert id="insert" parameterType="News">
+ </insert>
+</mapper>

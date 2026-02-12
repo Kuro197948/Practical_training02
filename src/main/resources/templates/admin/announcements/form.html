@@ -3,29 +3,62 @@
 
 
 <body>
-	<th:block th:replace="layout/base :: base(
+	<th:block th:replace="~{layout/base :: base(
 		'ログイン選択',
 		~{::head},
 		~{::#page},
 		~{::script}
-		)">
+		)}">
 	<!--headに追加したいものがあればここに書く(無ければ空でOK-->
 	<head></head>
 		
 		<div id="page">
-	<h1 class="mb-20">お知らせ投稿</h1>
-	<!--th:hrefにより/member/loginというURLを作れと指示-->
-	<!--class=btnでこの要素はボタンとして扱うと宣言-->
-	
-
+	<h1 class="mb-20">お知らせ一覧</h1>
+		
+	<div class="alert alert-success mt-4"role="alert">
+		お知らせを追加しました
+	</div>
+	<p>
+		<a class="mt-4 btn btn-primary" th:href="@{/admin/announcements/add}">お知らせの追加</a>
+		<a class="mt-4 ms-4 btn btn-secondary" th:href="@{/admin/logout}">ログアウト
+			
+		</a>
+	</p>
+	<table class="table table-striped align-middle">
+		<thead>
+		<tr>
+			<th style="width: 70px;">ID</th>
+			<th style="width: 120px;">投稿者</th>
+			<th>タイトル</th>
+			<th style="width: 160px;">掲載日</th>
+			<th style="width: 140px;">操作</th>
+		</tr>
+		</thead>
+		
+		<tbody>
+		<tr th:each="news : ${newsList}">
+			<td th:text="${news.id}">1</td>
+			<td th:text="${news.author}">投稿者</td> 
+			<td th:text="${news.title}">タイトル</td> 
+			<td th:text="${news.postDate !=null ? #temporals.format(news.postDate, 
+				'yyyy年MM月dd日'):''}"></td>
+				<td>
+					<a class="btn btn-primary"
+					th:href="@{/admin/announcements/{id}
+					(id=${news.id})}">
+					詳細を見る
+					</a>
+				</td>
+		
+		</tr>
+		</tbody>
+	</table>
 	</div>
 	<!--scriptを追加したい時だけ書く(無ければ空でOK-->
 	<script></script>
 	</th:block>
-	<footer>
-		<a th:href="@{/loginHome}" class="btn btn-primary">
-		ログアウト
-	</footer>
+	
 
 </body>
+
 </html>

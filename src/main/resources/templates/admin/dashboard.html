@@ -24,18 +24,7 @@
 	
 	<a th:href="@{/admin/announcements/list}" class="btn btn-secondary">
 		会員一覧
-		</th:block>
-		
-		<th:block th:unless="${session.gloinId}">
-			<form class="mt-4" action=""method="post" th:object="${admin}">
-				<span th:errors="*{loginId}" clsss="error"></span>
-				<p class="mt-2">ログインID:
-					<input type="text" th:field="*{loginId}"></p>
-					<p>パスワード:<input type="password" th:field="*{loginPass}"></p>
-					<input clas="btn btn-primary" type="submit" value="ログイン">
-			</form>
-		</th:block>
-		
+	
 	</a>
 	</div>
 	</div>
@@ -43,7 +32,7 @@
 	<script></script>
 	</th:block>
 	<footer>
-		<a th:href="@{/loginHome}" class="btn btn-primary">
+		<a th:href="@{/admin/logout}" class="btn btn-primary">
 		ログアウト
 	</footer>
 

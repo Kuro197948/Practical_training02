@@ -13,20 +13,33 @@
 	
 <head></head>
 <div id="page"class ="col-md-6 mx-auto">
+	
 <h1 class = "mb-3">会員管理システム</h1>
+<!--①送信先URLと②送信方法POSTを指定-->
+<!--③th:objectでAdminオブジェクトに紐づけ-->
 
-<form>
+
+<form th:action="@{/admin/login}" method="post"th:object="${admin}">
+	
 	<div class="mb-3">
 		<label class="form-label">ID</label>
-		<input type = "text" class="form-control">
+		<!--④th:fieldでAdmin.loginIdにバインド(nameも自動で付く)-->
+		<input type = "text" class="form-control" th:field="*{loginId}">
+		<!--バリデーションエラー表示-->
+		<div class="text-danger" th:errors="*{loginId}"></div>
 	</div>
 	<div class="mb-3">
 		<label class="form-label">Password</label>
-		<input type="password" class="form-control">
+		<!--④th:fieldでAdmin.loginPassにバインド-->
+		<input type="password" class="form-control" th:field="*{loginPass}">
+		<div class="text-danger" th:errors="*{loginPass}"></div>
 	</div>
 	
 	<button class = "btn btn-primary w-100"type="submit">ログイン</button>
 </form>
+
+<!--認証失敗(ID/パス違い)要のメッセージ領域(Controller側で入れる想定-->
+<div class="text-danger mt-3" th:if="${errorMessage}"th:text="${errorMessage}"></div>
 </div>
 <script></script>
 
