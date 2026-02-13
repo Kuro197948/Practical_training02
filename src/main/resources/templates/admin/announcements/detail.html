@@ -2,9 +2,54 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>お知らせ詳細</title>
+
 </head>
 <body>
-
+	<th:block th:replace="layout/base :: base(
+			'ログイン選択',
+			~{::head},
+			~{::#page},
+			~{::script}
+			)">
+			<!--headに追加したいものがあればここに書く(無ければ空でOK-->
+			<head>	<meta charset="UTF-8"></head>
+			<div id="page">
+<div class="container">
+<h1 class="mt-4">お知らせ詳細</h1>
+<p>
+	<a class="mt-4 btn btn-primary" th:href="@{/admin/announcements/form}">一覧に戻る</a>
+</p>
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<td>2</td>
+	</tr>
+	<tr>
+		<th>投稿者</th>
+		<td>クロ</td>
+	</tr>
+	<!-- お知らせの配信対象が限定される場合:start -->
+	<tr>
+		<th>配信の対象</th>
+		<td>
+			<p>通常会員</p>
+			<p>プレミアム会員</p>
+		</td>
+	</tr>
+	<!-- お知らせの配信対象が限定される場合:end -->
+	<tr>
+		<th>内容</th>
+		<td>5月31日5:00~9:00まで、定期メンテナンスを行います。ご不便をお掛けしますが、ご理解のほどよろしくお願いいたします。</td>
+	</tr>
+	<!-- イメージ画像がある場合:start -->
+	<tr>
+		<th>イメージ画像</th>
+		<td><img src="https://placehold.jp/5dab9f/ffffff/200x200.png?text=Dummy Image" alt=""></td>
+	</tr>
+	<!-- イメージ画像がある場合:end -->
+</table>
+</div>
+</div>
 </body>
 </html>

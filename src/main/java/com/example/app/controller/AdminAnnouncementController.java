@@ -1,11 +1,18 @@
 package com.example.app.controller;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.app.domain.News;
+import com.example.app.domain.NewsForm;
 import com.example.app.service.NewsService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,16 +28,40 @@ public class AdminAnnouncementController {
 	 
 	 return "admin/announcements/form";
  }
+ 
+ @GetMapping("/submit")
+ public String addGet(Model model) {
+ model.addAttribute("newsForm", new NewsForm());
+ return "admin/announcements/submit";
+ }
 
- @GetMapping("/add")
- public String list(Model model) {
- model.addAttribute("news", new News());
- return "admin/announcements/form";
+ @PostMapping("/submit")
+ public String submitPost(
+ HttpSession session,
+ @Valid @ModelAttribute("newsForm") NewsForm newsForm,
+ Errors errors,
+ RedirectAttributes ra,
+ Model model) {
+	 if(errors.hasErrors()) {
+	 return "admin/announcements/submit";
+	 newsService.addNews(newsForm); 
+	 ra.addFlashAttribute("message", "お知らせを追加しました");
+	 return "redirect:/admin/announcements/form";
+	
+	 }
+return "redirect:/admin/announcements/form";
 }
- @GetMapping("/{id}")
+ 
+
+ 
+ @GetMapping("/{id:\\d+}")
  public String detail(@PathVariable Integer id, Model model) {
  model.addAttribute("news", newsService.getNewsById(id));
- return "news/detail";
+ return "admin/announcements/detail";
+ }
+ @GetMapping("/list")
+ public String list() {
+	return "admin/announcements/list";
  }
 
 }

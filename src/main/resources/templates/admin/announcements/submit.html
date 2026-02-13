@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>お知らせの追加</title>
+
+</head>
+<body>
+	<th:block th:replace="layout/base :: base(
+			'ログイン選択',
+			~{::head},
+			~{::#page},
+			~{::script}
+			)">
+			<!--headに追加したいものがあればここに書く(無ければ空でOK-->
+			<head>	<meta charset="UTF-8"></head>
+			<div id="page">
+<div class="container">
+	
+<h1 class="mt-4">お知らせの追加</h1>
+<form th:action="@{/admin/announcements/submit}" method="post" th:object="${newsForm}">
+
+	<span th:errors="*{title}" class="error"></span>
+	<p class="mt-2">タイトル:<input type ="text" th:field="*{title}"></p>
+	<span th:errors="*{postDate}" class="error"></span>
+		<p class="mt-2">掲載日:<input type ="date" th:field="*{postDate}"></p>
+	
+		<!--/*		<p class="news_target">対象を限定する場合は☑：
+			 <th:block th:each="type : ${memberTypeList}">
+			 <label><input type="checkbox" name="targetIdList"
+			th:value="${type.id}"> [[${type.name}]]</label>
+			 </th:block>
+			 </p> */-->
+
+		 <span th:errors="*{article}" class="error"></span>
+		  <p class="mt-2">内容：<br>
+		  <textarea th:field="*{article}" cols="40" rows="5"></textarea></p>
+		<!--/* <span class="error">イメージ画像に関するエラーメッセージ</span>
+		  <p class="mt-2">イメージ画像：<input type="file" name="upfile"></p> </form>*/--> 
+		  <input class="btn btn-primary" type="submit">
+		
+ 
+		 	
+<p>
+	<a class="mt-4 btn btn-primary" th:href="@{/admin/announcements/form}">一覧に戻る</a>
+</p>
+
+
+</div>
+</div>
+</body>
+</html>
